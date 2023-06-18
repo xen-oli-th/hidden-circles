@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Hidden Circles</title>
+    <link href="styles.css" rel="stylesheet"/>
+    <script src="scripts/jquery-3.6.0.min.js"></script>
+    <script src="scripts/game.js"></script>
+    <script src="scripts/strings.js"></script>
+</head>
+
+<body>
+    <div class="game-window">
+
+        <div class="ball" id="b0"></div>
+        <div class="ball" id="b1"></div>
+        <div class="ball" id="b2"></div>
+        <div class="ball" id="b3"></div>
+        <div class="ball" id="b4"></div>
+
+        <p class="msg"></p>
+
+        <div class="click"></div>
+
+    </div>
+
+    <div class="menu">
+
+        <h1>Hidden Circles</h1>
+        <p class="score" id="score">Score: 0</p>
+        <p class="score" id="highscore">High Score: 0</p>
+        <button class="play button" onclick="playClicked()" id="enabled-button">Play Game</button>
+        <button class="share button" onclick="shareClicked()" id="enabled-button">Share Score</button>
+        <label for="ball-size">Ball Size</label>
+        <input type="range" id="ball-size" min="20" max="80" step="20" value="40">
+
+        <h2>How To Play</h2>
+        <p>After memorising the position of the circles, press the button above to begin.</p>
+        <p>Try to click on the location of the circles. If you succeed, the circle will reappear green.</p>
+        <p>After you successfully click on one circle, you can press the button above to reset the circles if you've forgotten the location of the rest of them.</p>
+        <p>If you manage to get all five circles in a single round, this is called a "Quintuple", and you are rewarded with five bonus points.</p>
+        <p>If you miss, the game ends.</p>
+
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+* {
+    margin: 0;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: white;
+    display: flex;
+    /* flex-wrap: wrap; */
+}
+
+/* C A N V A S */
+.game-window {
+    position: relative;
+    box-sizing: border-box;
+    width: 600px;
+    height: 600px;
+    margin-left: 20px;
+    margin-top: 20px;
+    /* float: left; */
+    border-style: inset;
+    border-width: 5px;
+    background-color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    flex: none;
+}
+
+.ball {
+    position: absolute;
+    top: 25;
+    left: 25;
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    /* padding: 20px; */
+    /* ball actual diameter = 2x padding, default = 20*/
+    background-color: red;
+    
+}
+
+div.click {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    z-index: 10;
+}
+
+p.msg {
+    z-index: 2;
+    margin-top: 200px;
+    font-size: 72px;
+}
+
+
+/* M E N U */
+.menu {
+    box-sizing: border-box;
+    position: relative;
+    width: 600px;
+    height: 600px;
+    margin: 20px;
+    /* float: left; */
+    border-style: solid;
+    border-width: 5px;
+    border-color: #333333;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: fit-content;
+    flex: none;
+}
+
+
+#score {
+    width: 100%;
+    font-size: 20px;
+}
+
+#highscore {
+    width: 100%;
+    font-size: 20px;
+}
+
+button {
+    margin: 10px;
+    padding: 10px;
+}
+
+.menu h1 {
+    padding: 5px;
+    margin: 10px 0 0 0;
+    text-align: center;
+    font-size: 32px;
+}
+
+.menu h2 {
+    padding: 5px 0;
+}
+
+.footnote {
+    position: absolute;
+    bottom: 0;
+}
+
+a, a:visited {
+    color: black;
+}
+
+.button {
+    background-color: #4CAF50;
+    font-size: 20px;
+    border-radius: 2px;
+    width: 250px;
+    border-style: none;
+}
+
+.button:hover {
+    background-color: #3C9F40;
+}
+
+.button:active {
+    background-color: #2C8F30;
+}
+
+#disabled-button {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.share {
+    background-color: #4CAF50;
+    font-size: 20px;
+    border-radius: 2px;
+    width: 250px;
+    border-style: none;
+}
+
+.share:hover {
+    background-color: #3C9F40;
+}
+
+.share:active {
+    background-color: #2C8F30;
+}
