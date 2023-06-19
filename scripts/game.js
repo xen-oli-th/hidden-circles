@@ -4,8 +4,10 @@
 // - share button
 // - make it look prittier (CSS)
 // - divide into separate js files maybe
-// - fix size disparity
 // - day/night mode
+
+
+let debugLevel = 3;
 
 
 const GREEN = "#90ee90";
@@ -15,8 +17,11 @@ const MSG_SIZE_SMALL = 48;
 const MSG_SIZE_MID = 72;
 const MSG_SIZE_LARGE = 96;
 
+// replace this stuff with better code
 const SCREEN_SIZE = 600;
+const OFFSET = 25; // jQuery .offset()
 const BORDER_WIDTH = 5;
+/////////////////////////////////////
 
 const BALL_COUNT = 5;
 const BUFFER = 2;
@@ -32,7 +37,8 @@ const GAME_STATES = {
 
 let gameState = GAME_STATES.ready;
 
-let ballSize = 40;
+let ballD = 40;
+let ballR = ballD/2;
 
 let score = 0;
 let highscore = 0;
@@ -49,8 +55,6 @@ for (let i = 0; i < BALL_COUNT; i++) {
     balls[i] = new Ball(-100, -100, false);
 }
 
-let debugLevel = 5;
-
 $(document).ready(function() {
 
     resetBoard();
@@ -64,16 +68,14 @@ $(document).ready(function() {
 
     $("div.click").click(function(e) {
         if (gameState === GAME_STATES.clickable || gameState === GAME_STATES.postThreshold) {
-            if (!withinCircle(e.pageX, e.pageY)) {
+            if (!withinCircle(e.pageX - OFFSET, e.pageY - OFFSET)) {
                 endGame();
             } else {
                 let falseCount = balls.filter(b => b.found === false).length;
                 if (falseCount === 0) {
-                    debugLevel >= 3 ? console.log(`QUINTUPLE!`) : "";
                     updateState(GAME_STATES.quintuple);
                     score += 5;
                 } else if (falseCount <= THRESHOLD && GAME_STATES.postThreshold !== gameState) {
-                    debugLevel >= 3 ? console.log(`"New round threshold" of ${BALL_COUNT - THRESHOLD} reached.`) : "";
                     updateState(GAME_STATES.postThreshold);
                 }
             }
@@ -81,11 +83,12 @@ $(document).ready(function() {
     })
 
     $("input#ball-size").change(function() {
-        ballSize = JSON.parse($(this).val());
+        ballD = JSON.parse($(this).val());
+        ballR = ballD/2;
         //console.log(ballSize);
         $('div.ball').css({
-            width: ballSize + "px",
-            height: ballSize + "px"
+            width: ballD + "px",
+            height: ballD + "px"
         });
         processScores();
         resetBoard();
@@ -141,20 +144,24 @@ function updateState(state) {
 
     switch (gameState) {
         case GAME_STATES.ready:
+            debugLevel >= 3 ? console.log(`Game is ready.`) : "";
             $("p#score").text(SCORE + score);
             $("p#highscore").text(HIGHSCORE + highscore);
             $("button.play").attr("id", "enabled-button").text(PLAY_GAME);
             $("p.msg").stop().hide();
         break;
         case GAME_STATES.clickable:
+            debugLevel >= 3 ? console.log(`Game has started.`) : "";
             $("button.play").attr("id", "disabled-button").text(NEXT_ROUND);
         break;
         case GAME_STATES.postThreshold:
+            debugLevel >= 3 ? console.log(`"New round threshold" of ${BALL_COUNT - THRESHOLD} reached.`) : "";
             $("button.play").attr("id", "enabled-button").text(NEXT_ROUND);
         break;
         case GAME_STATES.quintuple:
+            debugLevel >= 3 ? console.log(`QUINTUPLE!`) : "";
             $("button.play").attr("id", "enabled-button").text(NEXT_ROUND);
-            $("p.msg").stop().text(QUINTUPLE).show().animate({
+            $("p.msg").stop().text(QUINTUPLE).css("font-size", MSG_SIZE_MID).show().animate({
                 fontSize: MSG_SIZE_LARGE
             }, {
                 duration: 1000, 
@@ -162,13 +169,15 @@ function updateState(state) {
             });
         break;
         case GAME_STATES.newRound:
+            debugLevel >= 3 ? console.log(`New round generated.`) : "";
             $("button.play").attr("id", "enabled-button").text(START_ROUND);
-            $("p.msg").stop().hide().css("font-size", MSG_SIZE_MID);
+            $("p.msg").stop().hide();
         break;
         case GAME_STATES.finished:
+            debugLevel >= 3 ? console.log(`Game over.`) : "";
             $("p#highscore").text(HIGHSCORE + highscore);
             $("button.play").attr("id", "enabled-button").text(NEW_GAME);
-            $("p.msg").stop().text(GAME_OVER).show();
+            $("p.msg").stop().text(GAME_OVER).css("font-size", MSG_SIZE_MID).show();
         break;
     }
 }
@@ -184,14 +193,19 @@ function ballClicked(ball) {
 
 function resetBoard() {
     for (let i = 0; i < balls.length; i++) {
-        balls[i].x = Math.floor(Math.random() * (SCREEN_SIZE - (BORDER_WIDTH * 2) - ballSize));
-        balls[i].y = Math.floor(Math.random() * (SCREEN_SIZE - (BORDER_WIDTH * 2) - ballSize));
+        balls[i].x = Math.floor(Math.random() * (SCREEN_SIZE - (BORDER_WIDTH * 2) - ballD));
+        balls[i].y = Math.floor(Math.random() * (SCREEN_SIZE - (BORDER_WIDTH * 2) - ballD));
         balls[i].found = false;
 
-        while (overlapCheck(i)) {
-            debugLevel >= 3 ? console.log(`There is an overlap with ball ${i} at [${balls[i].x}, ${balls[i].y}], re-rolling.`) : "";
-            balls[i].x = Math.floor(Math.random() * (SCREEN_SIZE - (BORDER_WIDTH * 2) - ballSize));
-            balls[i].y = Math.floor(Math.random() * (SCREEN_SIZE - (BORDER_WIDTH * 2) - ballSize));
+        for (let count = 0; count < 100; count++) {
+            if (overlapCheck(i)) {
+                debugLevel >= 3 ? console.log(`There is an overlap with ball ${i} at [${balls[i].x}, ${balls[i].y}], re-rolling (attempt ${count + 1}).`) : "";
+                balls[i].x = Math.floor(Math.random() * (SCREEN_SIZE - (BORDER_WIDTH * 2) - ballD));
+                balls[i].y = Math.floor(Math.random() * (SCREEN_SIZE - (BORDER_WIDTH * 2) - ballD));
+            }
+            else {
+                break;
+            }
         }
 
         $("div.ball#b" + i).css({
@@ -204,19 +218,16 @@ function resetBoard() {
 
 function overlapCheck(i) {
     for (let j = 0; j < i; j++) {
-        // console.log(`checking ${i} @ [${balls[i].x}, ${balls[i].y}] & ${j} @ [${balls[j].x}, ${balls[j].y}]`)
-        if ((Math.abs(balls[i].x - balls[j].x) <= ballSize) && (Math.abs(balls[i].y - balls[j].y) <= ballSize)) {
+        if (distanceCheck([balls[i].x, balls[i].y, ballR], [balls[j].x, balls[j].y, ballR], ballD + BUFFER)) {
             return true;
-        }
+        } 
     }
     return false;
 }
 
 function withinCircle(x, y) {
     for (let i = 0; i < balls.length; i++) {
-        let xDist = balls[i].x + ballSize + BORDER_WIDTH - x;
-        let yDist = balls[i].y + ballSize + BORDER_WIDTH - y;
-        if (Math.sqrt(xDist * xDist + yDist * yDist) <= ballSize/2 + BUFFER) {
+        if (distanceCheck([balls[i].x, balls[i].y, ballR], [x, y, 0], ballR + BUFFER)) {
             debugLevel >= 3 ? console.log(`Player clicked within ball ${i}.`) : "";
             ballClicked(i);
             return true;
@@ -227,7 +238,6 @@ function withinCircle(x, y) {
 }
 
 function endGame() {
-    debugLevel >= 3 ? console.log(`Game over.`) : "";
     revealCircles();
     processScores();
     updateState(GAME_STATES.finished);
@@ -237,4 +247,18 @@ function processScores() {
     highscore = score > highscore ? score : highscore;
     localStorage.setItem("highscore", JSON.stringify(highscore));
     score = 0;
+}
+
+function distanceCheck(pos1, pos2, dist) {
+    // pos1[2] = (pos1[2] === null || pos1[2] === undefined) ? 0 : pos1[2]
+    // pos2[2] = (pos2[2] === null || pos2[2] === undefined) ? 0 : pos2[2]
+    let x = (pos1[0] + pos1[2]) - (pos2[0] + pos2[2]);
+    let y = (pos1[1] + pos1[2]) - (pos2[1] + pos2[2]);
+    if (Math.sqrt(x * x + y * y) <= dist) {
+        debugLevel >= 4 ? console.log(`Distance (${dist}) check between [${pos1[0]}, ${pos1[1]}] and [${pos2[0]}, ${pos2[1]}] returning TRUE (${x}, ${y}).`) : "";
+        return true;
+    } else {
+        debugLevel >= 4 ? console.log(`Distance (${dist}) check between [${pos1[0]}, ${pos1[1]}] and [${pos2[0]}, ${pos2[1]}] returning FALSE (${x}, ${y}).`) : "";
+        return false;
+    }
 }
