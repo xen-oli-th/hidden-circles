@@ -1,16 +1,9 @@
-// todo:
-// - highscore changes when changing ball size
-// - grid mode
-// - share button
-// - make it look prittier (CSS)
-// - divide into separate js files maybe
-// - day/night mode
-
 $(document).ready(function() {
 
     $("input#ball-size").val(40);
 
     $("input#ball-size").change(function() {
+        processScores();
         ballD = JSON.parse($(this).val());
         ballR = ballD/2;
         //console.log(ballSize);
@@ -18,7 +11,7 @@ $(document).ready(function() {
             width: ballD + "px",
             height: ballD + "px"
         });
-        processScores();
+        highscore = highscores[ballD] !== null && highscores[ballD] !== undefined ? highscores[ballD] : 0;
         resetBoard();
         updateState(GAME_STATES.ready);
     });

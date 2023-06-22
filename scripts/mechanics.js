@@ -1,19 +1,19 @@
 function hideCircles() {
     for (let i = 0; i < balls.length; i++) {
-        $("div.ball#b" + i).css("background-color", INVIS);
+        $("div.ball#b" + i).css("background-color", BALL_INVIS);
     }
 }
 
 function revealCircles() {
     for (let i = 0; i < balls.length; i++) {
         if (!balls[i].found) {
-            $("div.ball#b" + i).css("background-color", RED);
+            $("div.ball#b" + i).css("background-color", BALL_RED);
         }
     }
 }
 
 function ballClicked(ball) {
-    $("div.ball#b" + ball).css("backgroundColor", GREEN);
+    $("div.ball#b" + ball).css("backgroundColor", BALL_GREEN);
     if (balls[ball].found === false) {
         score++;
         $("p#score").text(SCORE + score);

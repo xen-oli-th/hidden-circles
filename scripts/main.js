@@ -1,3 +1,10 @@
+// todo:
+// - share button
+// - day/night mode (settings menu)
+// - grid :/
+// - pazaz (font)
+// - juice (sfx & +score toast)
+
 $(document).ready(function() {
 
     resetBoard();
@@ -13,6 +20,7 @@ $(document).ready(function() {
                 if (falseCount === 0) {
                     updateState(GAME_STATES.quintuple);
                     score += 5;
+                    $("p#score").text(SCORE + score);
                 } else if (falseCount <= THRESHOLD && GAME_STATES.postThreshold !== gameState) {
                     updateState(GAME_STATES.postThreshold);
                 }
@@ -83,7 +91,7 @@ function resetBoard() {
         }
 
         $("div.ball#b" + i).css({
-            backgroundColor: RED,
+            backgroundColor: BALL_RED,
             left: balls[i].x,
             top: balls[i].y
         })
@@ -97,7 +105,14 @@ function endGame() {
 }
 
 function processScores() {
-    highscore = score > highscore ? score : highscore;
-    localStorage.setItem("highscore", JSON.stringify(highscore));
+    // highscore = score > highscore ? score : highscore;
+    // localStorage.setItem("highscore", JSON.stringify(highscore));
+
+    if (score > highscore) {
+        debugLevel >= 2 ? console.log("Highscore broken, setting new score.") : "";
+        highscore = score;
+        highscores[ballD] = score;
+        localStorage.setItem("highscores", JSON.stringify(highscores));
+    }
     score = 0;
 }

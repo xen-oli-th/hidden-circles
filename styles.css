@@ -1,48 +1,51 @@
 * {
     margin: 0;
+    font-family: sans-serif;
 }
 
 body {
-    font-family: sans-serif;
-    background-color: white;
+    background-color: #ffffff; /* WHITE */
     display: flex;
     /* flex-wrap: wrap; */
 }
 
 /* C A N V A S */
-.game-window {
+div.game-window {
     position: relative;
-    box-sizing: border-box;
     width: 600px;
     height: 600px;
+
     margin-left: 20px;
     margin-top: 20px;
-    /* float: left; */
-    border-style: inset;
-    border-width: 5px;
-    background-color: whitesmoke;
+
     display: flex;
     justify-content: center;
     flex: none;
+
+    box-sizing: border-box;
+    border-style: inset;
+    border-width: 5px;
+
+    background-color: #f5f5f5; /* OFF_WHITE */
 }
 
-.ball {
+div.ball {
     position: absolute;
     top: 25;
     left: 25;
-    border-radius: 100%;
+
     width: 40px;
     height: 40px;
-    /* padding: 20px; */
-    /* ball actual diameter = 2x padding, default = 20*/
-    background-color: red;
-    
+
+    border-radius: 100%;
+    background-color: #ff0000; /* BALL_RED */
 }
 
 div.click {
     position: absolute;
     top: 0;
     left: 0;
+
     width: 100%;
     height: 100%;
 
@@ -50,58 +53,127 @@ div.click {
 }
 
 p.msg {
-    z-index: 2;
     margin-top: 200px;
+    z-index: 2;
+
     font-size: 72px;
 }
 
 
 /* M E N U */
-.menu {
-    box-sizing: border-box;
+div.menu {
     position: relative;
-    width: 600px;
-    height: 600px;
     margin: 20px;
-    /* float: left; */
+
+    width: 300px;
+    height: 600px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: none;
+    /* flex-wrap: wrap; */
+    /* max-width: fit-content; */
+
+    box-sizing: border-box;
     border-style: solid;
     border-width: 5px;
-    border-color: #333333;
-    padding: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    max-width: fit-content;
-    flex: none;
-}
+    border-color: #333333; /* BORDER_GREY */
 
-
-#score {
-    width: 100%;
-    font-size: 20px;
-}
-
-#highscore {
-    width: 100%;
-    font-size: 20px;
-}
-
-button {
-    margin: 10px;
     padding: 10px;
 }
 
-.menu h1 {
-    padding: 5px;
-    margin: 10px 0 0 0;
+div.score-container {
+    flex-grow: 0;
+    margin-bottom: 20px;
+}
+
+div.score-container h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
     text-align: center;
-    font-size: 32px;
 }
 
-.menu h2 {
-    padding: 5px 0;
+div.score-container p {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
-.footnote {
+
+div.buttons-container {
+    flex-grow: 0;
+    margin-bottom: 30px;
+}
+
+div.buttons-container button.button {
+    margin: 0 10px 10px 10px;
+    /* padding: 0 15px; */
+    width: 250px;
+    height: 50px;
+
+    border-radius: 2px;
+    border-style: none;
+
+    background-color: #4CAF50; /* BUTTON_GREEN_LIGHT */
+    font-size: 20px;
+}
+
+div.buttons-container div.share-options-container {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+div.buttons-container div.share-options-container button.settings {
+    width: 25%;
+    margin-left: 0;
+}
+
+div.buttons-container button.button#enabled-button:hover {
+    background-color: #3C9F40; /* BUTTON_GREEN_MID */
+}
+
+div.buttons-container button.button#enabled-button:active {
+    background-color: #2C8F30; /* BUTTON_GREEN_DARK */
+}
+
+div.buttons-container button#disabled-button {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+div.buttons-container label {
+    margin-top: 10px;
+    display: block;
+    text-align: center;
+    font-size: 18px;
+}
+
+div.buttons-container div.input-wrapper {
+    margin: 5px 10px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+div.how-to-play-container {
+    flex-grow: 1;
+}
+
+div.how-to-play-container h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+div.how-to-play-container p {
+    font-size: 16px;
+    text-align: left;
+    margin: 0 5px;
+}
+
+
+/* for a dono link */
+p.footnote {
     position: absolute;
     bottom: 0;
 }
@@ -110,39 +182,3 @@ a, a:visited {
     color: black;
 }
 
-.button {
-    background-color: #4CAF50;
-    font-size: 20px;
-    border-radius: 2px;
-    width: 250px;
-    border-style: none;
-}
-
-.button:hover {
-    background-color: #3C9F40;
-}
-
-.button:active {
-    background-color: #2C8F30;
-}
-
-#disabled-button {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-.share {
-    background-color: #4CAF50;
-    font-size: 20px;
-    border-radius: 2px;
-    width: 250px;
-    border-style: none;
-}
-
-.share:hover {
-    background-color: #3C9F40;
-}
-
-.share:active {
-    background-color: #2C8F30;
-}
