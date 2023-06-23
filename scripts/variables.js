@@ -1,4 +1,4 @@
-let debugLevel = 3;
+let debugLevel = 4;
 
 
 
@@ -9,31 +9,42 @@ const MSG_SIZE_LARGE = 96;
 // COLOURS
 const BALL_GREEN = "#90ee90";
 const BALL_RED = "#ff0000";
-const BALL_PURPLE = 0;
-const BALL_ORANGE = 0;
+const BALL_PURPLE = "#8228dc";
+const BALL_ORANGE = "#f98c17";
 const BALL_INVIS = "#00000000";
 
-const OFF_WHITE = "#f5f5f5";
-const OFF_GREY = 0;
-const BORDER_GREY = "#333333";
-const BORDER_WHITE = 0;
-const WHITE = "#ffffff";
-const GREY = 0;
+const OFF_WHITE = "#f5f5f5"; // canvas & settings (& text & border)
+const OFF_GREY = "#202020"; // ^
+const BORDER_GREY = "#333333"; // borders
+const WHITE = "#ffffff"; // main page bg
+const GREY = "#252525"; // ^
+const BLACK = "#000000" // text
+const DARKENING = "#00000022"; // misc
+const LIGHTENING = "#ffffff22"; // ^
+const SEMI_DARK = "#aaaaaaaa"; // misc
+const SEMI_LIGHT = "#666666aa"; // ^
 
-const BUTTON_GREEN_LIGHT = "#4CAF50";
-const BUTTON_GREEN_MID = "#3C9F40";
-const BUTTON_GREEN_DARK = "#2C8F30";
+const BUTTON_NORMAL_GREEN = "#4CAF50";
+const BUTTON_HOVER_GREEN = "#3C9F40";
+const BUTTON_ACTIVE_GREEN = "#2C8F30";
 
-let ballBad = BALL_RED;
-let ballGood = BALL_GREEN;
+const BUTTON_NORMAL_PURPLE = "#8228dc";
+const BUTTON_HOVER_PURPLE = "#7021bf";
+const BUTTON_ACTIVE_PURPLE = "#621ca8";
 
-let canvasColour = OFF_WHITE;
-let borderColour = BORDER_GREY;
-let bgColour = WHITE;
+const ballBad = "var(--ball-bad)";
+const ballGood = "var(--ball-good)";
+const ballInvis = "var(--ball-invis)";
 
-let buttonNormal = BUTTON_GREEN_LIGHT;
-let buttonHover = BUTTON_GREEN_MID;
-let buttonActive = BUTTON_GREEN_DARK;
+let css = document.querySelector(":root");
+
+// let canvasColour = OFF_WHITE;
+// let borderColour = BORDER_GREY;
+// let bgColour = WHITE;
+
+// let buttonNormal = BUTTON_NORMAL_GREEN;
+// let buttonHover = BUTTON_HOVER_GREEN;
+// let buttonActive = BUTTON_ACTIVE_GREEN;
 
 
 // replace this stuff with better code
@@ -84,3 +95,7 @@ if (hs === null || hs === undefined) {
 }
 let score = 0;
 let highscore = highscores[ballD] !== null && highscores[ballD] !== undefined ? highscores[ballD] : 0;
+
+let nightModeVal = typeof(JSON.parse(localStorage.getItem("nightMode"))) === "boolean" ? JSON.parse(localStorage.getItem("nightMode")) : false;
+
+let settingsActive = false;

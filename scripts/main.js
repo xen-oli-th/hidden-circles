@@ -1,10 +1,8 @@
 // todo:
 // - share button
-// - day/night mode (settings menu)
 // - grid :/
 // - pazaz (font)
 // - juice (score toast)
-// - spacebar binding
 
 $(document).ready(function() {
 
@@ -92,7 +90,7 @@ function resetBoard() {
         }
 
         $("div.ball#b" + i).css({
-            backgroundColor: BALL_RED,
+            backgroundColor: ballBad,
             left: balls[i].x,
             top: balls[i].y
         })

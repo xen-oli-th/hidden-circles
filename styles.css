@@ -4,10 +4,32 @@
     box-sizing: border-box;
 }
 
+:root {
+    --ball-bad: #ff0000;
+    --ball-good: #90ee90;
+    --ball-invis: #00000000;
+    --bg: #ffffff;
+    --off-bg: #f5f5f5;
+    --border-colour: #333333;
+    --button-normal: #4CAF50;
+    --button-hover: #3C9F40;
+    --button-active: #2C8F30;
+    --text-colour: black;
+    --darkening: #00000022;
+    --semi-dark: #aaaaaaaa;
+    --exit-hover: #ff2222ff;
+    --exit-active: #ee1111ff;
+    --checkbox-active: #8228dc;
+}
+
 body {
-    background-color: #ffffff; /* WHITE */
+    background-color: var(--bg, #ffffff);
     display: flex;
-    /* flex-wrap: wrap; */
+    color: var(--text-colour, #000000);
+}
+
+button {
+    color: var(--text-colour, #000000);
 }
 
 /* C A N V A S */
@@ -23,11 +45,10 @@ div.game-window {
     justify-content: center;
     flex: none;
 
-    box-sizing: border-box;
     border-style: inset;
     border-width: 5px;
 
-    background-color: #f5f5f5; /* OFF_WHITE */
+    background-color: var(--off-bg, #f5f5f5);
 }
 
 div.ball {
@@ -39,7 +60,7 @@ div.ball {
     height: 40px;
 
     border-radius: 100%;
-    background-color: #ff0000; /* BALL_RED */
+    background-color: var(--ball-bad, #ff0000);
 }
 
 div.click {
@@ -50,7 +71,7 @@ div.click {
     width: 100%;
     height: 100%;
 
-    z-index: 10;
+    z-index: 4;
 }
 
 p.msg {
@@ -73,20 +94,15 @@ div.menu {
     flex-direction: column;
     justify-content: space-between;
     flex: none;
-    /* flex-wrap: wrap; */
-    /* max-width: fit-content; */
 
-    box-sizing: border-box;
     border-style: solid;
     border-width: 5px;
-    border-color: #333333; /* BORDER_GREY */
-
-    padding: 10px;
+    border-color: var(--border-colour, #333333);
 }
 
 div.score-container {
     flex-grow: 0;
-    margin-bottom: 20px;
+    margin: 10px;
 }
 
 div.score-container h1 {
@@ -104,19 +120,18 @@ div.score-container p {
 
 div.buttons-container {
     flex-grow: 0;
-    margin-bottom: 30px;
+    margin: 10px;
 }
 
 div.buttons-container button.button {
     margin: 0 10px 10px 10px;
-    /* padding: 0 15px; */
     width: 250px;
     height: 50px;
 
     border-radius: 2px;
     border-style: none;
 
-    background-color: #4CAF50; /* BUTTON_GREEN_LIGHT */
+    background-color: var(--button-normal, #4CAF50);
     font-size: 20px;
 }
 
@@ -131,11 +146,11 @@ div.buttons-container div.share-options-container button.settings {
 }
 
 div.buttons-container button.button#enabled-button:hover {
-    background-color: #3C9F40; /* BUTTON_GREEN_MID */
+    background-color: var(--button-hover, #3C9F40);
 }
 
 div.buttons-container button.button#enabled-button:active {
-    background-color: #2C8F30; /* BUTTON_GREEN_DARK */
+    background-color: var(--button-active, #2C8F30);
 }
 
 div.buttons-container button#disabled-button {
@@ -157,6 +172,7 @@ div.buttons-container div.input-wrapper {
 }
 
 div.how-to-play-container {
+    margin: 10px;
     flex-grow: 1;
 }
 
@@ -172,14 +188,11 @@ div.how-to-play-container p {
     margin: 0 5px;
 }
 
-
-/* for a dono link */
 p.footer {
     position: absolute;
     bottom: 0;
 
     width: 100%;
-    box-sizing: border-box;
     display: flex;
     justify-content: center;
     
@@ -188,6 +201,125 @@ p.footer {
 p.footer a, a:visited {
     font-size: 14px;
     text-align: center;
-    color: black;
+    color: var(--text-colour, #000000);
+}
+
+/* S E T T I N G S   M E N U */
+div.settings-menu-wrapper {
+    position: fixed;
+
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--semi-dark, #aaaaaaaa);
+
+    z-index: 5;
+}
+
+div.settings-menu-wrapper div.settings-menu {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    margin: auto;
+
+    border-radius: 2px;
+    border: solid;
+    border-width: 1px;
+    border-color: var(--border-colour, #333333);
+
+    background-color: var(--off-bg, #f5f5f5);
+
+    z-index: 6;
+}
+
+div.settings-menu h1 {
+    margin: 20px;
+    text-align: center;
+}
+
+div.settings-menu button.exit-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+
+    text-align: center;
+    font-size: 24px;
+
+    border-style: none;
+    border-radius: 0px 1px 0px 2px;
+
+    background-color: var(--darkening, #00000022);
+
+}
+
+div.settings-menu button.exit-button:hover {
+    background-color: var(--exit-hover, #ff2222ff);
+}
+
+div.settings-menu button.exit-button:active {
+    background-color: var(--exit-active, #ee1111ff);
+}
+
+div.settings-menu div.option-container {
+    margin: 15px 20px;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+div.option-container label {
+    font-size: 18px;
+    line-height: 20px;
+}
+
+div.option-container input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+div.option-container span.checkbox {
+    position: absolute;
+    right: 20px;
+
+    height: 20px;
+    width: 20px;
+
+    background-color: var(--darkening, #00000022);
+}
+
+div.option-container input:checked ~ span.checkbox {
+    background-color: var(--checkbox-active, #8228dc);
+}
+
+div.option-container span.checkbox:after {
+    position: absolute;
+    display: none;
+
+    content: "";
+
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+  
+div.option-container input:checked ~ span.checkbox:after {
+    display: block;
 }
 

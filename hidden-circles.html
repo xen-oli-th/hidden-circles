@@ -38,7 +38,7 @@
             <button class="play button" onclick="playClicked()" id="disabled-button">Play Game</button>
             <div class="share-options-container">
                 <button class="share button" onclick="shareClicked()" id="enabled-button">Share Score</button>
-                <button class="settings button" onclick="optionsClicked()" id="enabled-button">⚙️</button>
+                <button class="settings button" onclick="settingsClicked()" id="enabled-button">⚙️</button>
             </div>
             <label for="ball-size">Ball Size</label>
             <div class="input-wrapper">
@@ -49,13 +49,34 @@
         <div class="how-to-play-container">
             <h2>How To Play</h2>
             <p>
-                Memorise the location of the circles and then after clicking play, try to click where the circles were to earn points.<br><br>
-                If you successfully click on all five circles you will be rewarded with bonus points.<br><br>
+                Memorise the location of the circles and then try to click where the circles were after pressing play.<br><br>
+                If you successfully find all circles you will be rewarded with bonus points.<br><br>
                 Try to get as many points as you can without missing!
             </p>
         </div>
 
         <p class="footer"><a>squarefleet</a></p>
+    </div>
+
+    <div class="settings-menu-wrapper">
+        <div class="settings-menu">
+            <h1>Settings</h1>
+            <button class="exit-button" onclick="exitClicked()">x</button>
+            <div class="option-container">
+                <label for="night-mode">Enable Night Mode
+                    <input class="builtin-checkbox" type="checkbox" id="night-mode" name="night-mode" value="true">
+                    <span class="checkbox"></span>
+                </label>
+            </div>
+
+            <div class="option-container">
+                <label for="grid-setting">Enable Grid
+                    <input class="builtin-checkbox" type="checkbox" id="grid-setting" name="grid-setting" value="true">
+                    <span class="checkbox"></span>
+                </label>
+            </div>
+
+        </div>
     </div>
 
 
