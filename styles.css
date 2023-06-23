@@ -1,6 +1,7 @@
 * {
     margin: 0;
     font-family: sans-serif;
+    box-sizing: border-box;
 }
 
 body {
@@ -173,12 +174,20 @@ div.how-to-play-container p {
 
 
 /* for a dono link */
-p.footnote {
+p.footer {
     position: absolute;
     bottom: 0;
+
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    
 }
 
-a, a:visited {
+p.footer a, a:visited {
+    font-size: 14px;
+    text-align: center;
     color: black;
 }
 

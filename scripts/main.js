@@ -3,7 +3,8 @@
 // - day/night mode (settings menu)
 // - grid :/
 // - pazaz (font)
-// - juice (sfx & +score toast)
+// - juice (score toast)
+// - spacebar binding
 
 $(document).ready(function() {
 
