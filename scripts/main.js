@@ -1,5 +1,5 @@
 // todo:
-// - pazaz (font)
+// - pizzazz (font)
 // - toasts (score & share)
 // - horiz ui mode
 
@@ -23,6 +23,7 @@ $(document).ready(function() {
                 if (falseCount === 0) {
                     updateState(GAME_STATES.quintuple);
                     score += 5;
+                    scoreToast("+5");
                     quintupleCount++;
                     debugLevel >= 3 ? console.log(`Player has achieved ${quintupleCount} quintuple(s) this game.`) : "";
                     $("p#score").text(SCORE + score);
@@ -57,11 +58,20 @@ function updateState(state) {
         case GAME_STATES.quintuple:
             debugLevel >= 3 ? console.log(`QUINTUPLE!`) : "";
             $("button.play").attr("id", "enabled-button").text(NEXT_ROUND);
-            $("p.msg").stop().text(QUINTUPLE).css("font-size", MSG_SIZE_MID).show().animate({
-                fontSize: MSG_SIZE_LARGE
+            $("p.msg").stop().text(QUINTUPLE).css({
+                fontSize: MSG_SIZE_MID,
+                opacity: 1,
+            }).show().animate({
+                fontSize: MSG_SIZE_MID + (MSG_SIZE_LARGE - MSG_SIZE_MID)/2,
             }, {
-                duration: 1000, 
-                easing: "swing",
+                duration: 500, 
+                easing: "linear",
+            }).animate({
+                fontSize: MSG_SIZE_LARGE,
+                opacity: 0,
+            }, {
+                duration: 500,
+                easing: "linear"
             });
         break;
         case GAME_STATES.newRound:
@@ -73,7 +83,10 @@ function updateState(state) {
             debugLevel >= 3 ? console.log(`Game over.`) : "";
             $("p#highscore").text(HIGHSCORE + highscore);
             $("button.play").attr("id", "enabled-button").text(NEW_GAME);
-            $("p.msg").stop().text(GAME_OVER).css("font-size", MSG_SIZE_MID).show();
+            $("p.msg").stop().text(GAME_OVER).css({
+                fontSize: MSG_SIZE_MID,
+                opacity: 1,
+            }).show();
         break;
     }
 }

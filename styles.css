@@ -14,7 +14,7 @@
     --button-normal: #4CAF50;
     --button-hover: #3C9F40;
     --button-active: #2C8F30;
-    --text-colour: black;
+    --text-colour: #000000;
     --darkening: #00000022;
     --semi-dark: #aaaaaaaa;
     --button-bad-normal: #ff4444ff;
@@ -169,10 +169,30 @@ div.score-container h1 {
     text-align: center;
 }
 
+div.score-container div.score-toast-container {
+    position: relative;
+}
+
 div.score-container p {
     font-size: 24px;
     text-align: center;
     margin-bottom: 10px;
+}
+
+div.score-container p.toast#score-toast {
+    position: absolute;
+    top: 0px;
+    left: 190px;
+    display: none;
+
+    font-size: 24px;
+    color: var(--button-normal, #4CAF50);
+
+    text-shadow:
+        -0.5px 0.5px 0 var(--text-colour, #ffffff),
+        0.5px 0.5px 0 var(--text-colour, #ffffff),
+        0.5px -0.5px 0 var(--text-colour, #ffffff),
+        -0.5px -0.5px 0 var(--text-colour, #ffffff);
 }
 
 div.score-container p#highscore {
@@ -359,6 +379,7 @@ div.option-container span.checkbox {
     height: 20px;
     width: 20px;
 
+    border-radius: 2px;
     background-color: var(--darkening, #00000022);
 }
 

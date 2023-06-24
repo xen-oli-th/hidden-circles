@@ -220,3 +220,20 @@ function disableHSReset() {
     $("input#hs-reset").prop("checked", allowHSReset);
 }
 
+function scoreToast(value) {
+    $("p#score-toast").stop().text(value).css({
+        top: "0px",
+        opacity: 1,
+        display: "block",
+    }).animate({
+        top: "-20px",
+        opacity: 0,
+    }, {
+        duration: 800,
+        easing: "swing",
+        complete: function() {
+            $(this).css("display", "none");
+        },
+    });
+}
+

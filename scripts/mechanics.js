@@ -18,6 +18,7 @@ function ballClicked(ball) {
         score++;
         $("p#score").text(SCORE + score);
         balls[ball].found = true;
+        scoreToast("+1");
     } 
 }
 

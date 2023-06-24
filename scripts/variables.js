@@ -4,7 +4,7 @@ let debugLevel = 4;
 
 const MSG_SIZE_SMALL = 48;
 const MSG_SIZE_MID = 72;
-const MSG_SIZE_LARGE = 96;
+const MSG_SIZE_LARGE = 120;
 
 // COLOURS
 const BALL_GREEN = "#90ee90";
