@@ -132,6 +132,7 @@ function shareClicked() {
     let share3;
     share3 = quintupleCount === 1 ? SHARE_3_SING : SHARE_3_PL; 
     navigator.clipboard.writeText(SHARE_1 + score + SHARE_2 + quintupleCount + share3 + currentMode + SHARE_4);
+    shareToast();
 }
 
 function nightMode(state) {
@@ -227,6 +228,23 @@ function scoreToast(value) {
         display: "block",
     }).animate({
         top: "-20px",
+        opacity: 0,
+    }, {
+        duration: 800,
+        easing: "swing",
+        complete: function() {
+            $(this).css("display", "none");
+        },
+    });
+}
+
+function shareToast() {
+    $("p#share-toast").stop().css({
+        top: "-10px",
+        opacity: 1,
+        display: "block",
+    }).animate({
+        top: "-25px",
         opacity: 0,
     }, {
         duration: 800,

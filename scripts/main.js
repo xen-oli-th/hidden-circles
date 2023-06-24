@@ -1,6 +1,5 @@
 // todo:
 // - pizzazz (font)
-// - toasts (score & share)
 // - horiz ui mode
 
 $(document).ready(function() {

@@ -189,10 +189,10 @@ div.score-container p.toast#score-toast {
     color: var(--button-normal, #4CAF50);
 
     text-shadow:
-        -0.5px 0.5px 0 var(--text-colour, #ffffff),
-        0.5px 0.5px 0 var(--text-colour, #ffffff),
-        0.5px -0.5px 0 var(--text-colour, #ffffff),
-        -0.5px -0.5px 0 var(--text-colour, #ffffff);
+        -0.5px 0.5px 0 var(--text-colour, #000000),
+        0.5px 0.5px 0 var(--text-colour, #000000),
+        0.5px -0.5px 0 var(--text-colour, #000000),
+        -0.5px -0.5px 0 var(--text-colour, #000000);
 }
 
 div.score-container p#highscore {
@@ -222,6 +222,7 @@ div.buttons-container button.button {
 }
 
 div.buttons-container div.share-options-container {
+    position: relative;
     display: flex;
     flex-wrap: nowrap;
 }
@@ -242,6 +243,23 @@ div.buttons-container button#enabled-button:active {
 div.buttons-container button#disabled-button {
     opacity: 0.4;
     cursor: not-allowed;
+}
+
+div.buttons-container p.toast#share-toast {
+    position: absolute;
+    top: -10px;
+    left: 25px;
+    width: 100%;
+    display: none;
+
+    font-size: 18px;
+    color: var(--text-colour, #000000);
+
+    text-shadow:
+        -0.5px 0.5px 0 var(--bg, #ffffff),
+        0.5px 0.5px 0 var(--bg, #ffffff),
+        0.5px -0.5px 0 var(--bg, #ffffff),
+        -0.5px -0.5px 0 var(--bg, #ffffff);
 }
 
 div.buttons-container label {
