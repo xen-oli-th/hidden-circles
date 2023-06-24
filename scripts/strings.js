@@ -11,6 +11,6 @@ const QUINTUPLE = "Quintuple!";
 // SCORING
 const SCORE = "Score: ";
 const HIGHSCORE = "Highscore: ";
-const BALL_SIZE = "(Ball size ";
+const BALL_SIZE = "(ball size ";
 const GRID_ON = " with the grid)";
 const GRID_OFF = ")";

@@ -3,10 +3,13 @@ let settingsHover = false;
 $(document).ready(function() {
 
     $("input#ball-size").val(ballD);
-    $("input#night-mode").checked = nightModeVal;
+
+    $("input#night-mode").prop("checked", nightModeVal);
     nightMode(nightModeVal);
-    $("input#grid-mode").checked = gridModeVal;
+    $("input#grid-mode").prop("checked", gridModeVal);
     gridMode(gridModeVal);
+
+    $("input#hs-reset").prop("checked", allowHSReset);
 
     $("p.mode").text(
         gridModeVal ? `${BALL_SIZE + ballD/20 + GRID_ON}` : `${BALL_SIZE + ballD/20 + GRID_OFF}`
@@ -61,6 +64,10 @@ $(document).ready(function() {
                 gridMode(gridModeVal);
                 localStorage.setItem("gridMode", JSON.stringify(gridModeVal));
             break;
+            case "hs-reset":
+                allowHSReset = val;
+                HSResetState(allowHSReset);
+            break;
         }
     })
 
@@ -76,6 +83,8 @@ $(document).ready(function() {
         if (!settingsHover) {
             $(this).css("display", "none");
             settingsActive = false;
+
+            disableHSReset();
         }
     });
 
@@ -114,6 +123,8 @@ function settingsClicked() {
 function exitClicked() {
     $("div.settings-menu-wrapper").css("display", "none");
     settingsActive = false;
+
+    disableHSReset();
 }
 
 function shareClicked() {
@@ -161,5 +172,47 @@ function gridMode(state) {
     highscore = highscores[+ gridModeVal][ballD] !== null && highscores[+ gridModeVal][ballD] !== undefined ? highscores[+ gridModeVal][ballD] : 0;
     resetBoard();
     updateState(GAME_STATES.ready);
+}
+
+function HSResetState(state) {
+    if (state) {
+        $("button.reset").attr("id", "enabled-button");
+    } else {
+        $("button.reset").attr("id", "disabled-button");
+    }
+}
+
+function resetCurrent() {
+    if (allowHSReset) {
+        debugLevel >= 3 ? console.log(`Resetting current score (${ballD} + ${gridModeVal})`) : "";
+        highscores[+ gridModeVal][ballD] = 0;
+        localStorage.setItem("highscores", JSON.stringify(highscores));
+        highscore = 0;
+        $("p#highscore").text(HIGHSCORE + highscore);
+
+        disableHSReset();
+    } else {
+        debugLevel >= 3 ? console.log(`Tried to reset current score but it is currently not allowed`) : "";
+    }
+}
+
+function resetAll() {
+    if (allowHSReset) {
+        debugLevel >= 3 ? console.log(`Resetting ALL scores`) : "";
+        highscores = [[], []];
+        localStorage.setItem("highscores", JSON.stringify(highscores));
+        highscore = 0;
+        $("p#highscore").text(HIGHSCORE + highscore);
+
+        disableHSReset();
+    } else {
+        debugLevel >= 3 ? console.log(`Tried to reset ALL scores but it is currently not allowed`) : "";
+    }
+}
+
+function disableHSReset() {
+    allowHSReset = false;
+    HSResetState(allowHSReset);
+    $("input#hs-reset").prop("checked", allowHSReset);
 }
 

@@ -45,7 +45,7 @@
             <h1>Hidden Circles</h1>
             <p class="score" id="score">Score: 0</p>
             <p class="score" id="highscore">High Score: 0</p>
-            <p class="mode">(Ball size 2)</p>
+            <p class="mode">(ball size 2)</p>
         </div>
         <div class="buttons-container">
             <button class="play button" onclick="playClicked()" id="disabled-button">Start Game</button>
@@ -89,6 +89,17 @@
                 </label>
             </div>
 
+            <div class="option-container">
+                <label for="hs-reset">Enable Highscore Reset
+                    <input class="builtin-checkbox" type="checkbox" id="hs-reset" name="hs-reset" value="true">
+                    <span class="checkbox"></span>
+                </label>
+            </div>
+
+            <div class="option-container buttons">
+                <button class="button reset current" id="disabled-button" onclick="resetCurrent()">Wipe Highscore</button>
+                <button class="button reset all" id="disabled-button" onclick="resetAll()">Wipe ALL Highscores</button>
+            </div>
         </div>
     </div>
 

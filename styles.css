@@ -17,8 +17,9 @@
     --text-colour: black;
     --darkening: #00000022;
     --semi-dark: #aaaaaaaa;
-    --exit-hover: #ff2222ff;
-    --exit-active: #ee1111ff;
+    --button-bad-normal: #ff4444ff;
+    --button-bad-hover: #ee2222ff;
+    --button-bad-active: #dd1111ff;
     --checkbox-active: #8228dc;
 }
 
@@ -77,10 +78,15 @@ div.click {
 }
 
 p.msg {
-    margin-top: 200px;
+    margin-top: 210px;
     z-index: 3;
 
     font-size: 72px;
+    text-shadow:
+        -3px 3px 0 var(--off-bg, #f5f5f5),
+        3px 3px 0 var(--off-bg, #f5f5f5),
+        3px -3px 0 var(--off-bg, #f5f5f5),
+        -3px -3px 0 var(--off-bg, #f5f5f5);
 }
 
 div.grid-container {
@@ -205,16 +211,16 @@ div.buttons-container div.share-options-container button.settings {
     margin-left: 0;
 }
 
-div.buttons-container button.button#enabled-button:hover {
+div.buttons-container button#enabled-button:hover {
     background-color: var(--button-hover, #3C9F40);
 }
 
-div.buttons-container button.button#enabled-button:active {
+div.buttons-container button#enabled-button:active {
     background-color: var(--button-active, #2C8F30);
 }
 
 div.buttons-container button#disabled-button {
-    opacity: 0.6;
+    opacity: 0.4;
     cursor: not-allowed;
 }
 
@@ -319,11 +325,11 @@ div.settings-menu button.exit-button {
 }
 
 div.settings-menu button.exit-button:hover {
-    background-color: var(--exit-hover, #ff2222ff);
+    background-color: var(--button-bad-normal, #ff4444ff);
 }
 
 div.settings-menu button.exit-button:active {
-    background-color: var(--exit-active, #ee1111ff);
+    background-color: var(--button-bad-hover, #ee2222ff);
 }
 
 div.settings-menu div.option-container {
@@ -381,5 +387,49 @@ div.option-container span.checkbox:after {
   
 div.option-container input:checked ~ span.checkbox:after {
     display: block;
+}
+
+
+
+
+div.option-container.buttons{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+div.option-container.buttons button.button {
+    /* margin: 0 10px 10px 10px; */
+    /* width: 250px; */
+    height: 50px;
+
+    border-radius: 2px;
+    border-style: none;
+
+    background-color: var(--button-normal, #4CAF50);
+    font-size: 16px;
+}
+
+div.option-container button#enabled-button:hover {
+    background-color: var(--button-hover, #3C9F40);
+}
+div.option-container button#enabled-button:active {
+    background-color: var(--button-active, #2C8F30);
+}
+
+div.option-container button.reset.all {
+    background-color: var(--button-bad-normal, #ff4444);
+}
+div.option-container button.reset.all#enabled-button:hover {
+    background-color: var(--button-bad-hover, #ee2222);
+}
+div.option-container button.reset.all#enabled-button:active {
+    background-color: var(--button-bad-active, #dd1111);
+}
+
+div.option-container button#disabled-button {
+    opacity: 0.4;
+    cursor: not-allowed;
 }
 

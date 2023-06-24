@@ -98,3 +98,4 @@ let highscore = highscores[+ gridModeVal][ballD] !== null && highscores[+ gridMo
 
 
 let settingsActive = false;
+let allowHSReset = false;
