@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Ysabeau+Office:wght@200&display=swap');
+
 * {
     margin: 0;
     font-family: sans-serif;
     box-sizing: border-box;
+    cursor: default;
 }
 
 :root {
@@ -31,6 +34,8 @@ body {
 
 button {
     color: var(--text-colour, #000000);
+    font-family: "Audiowide", sans-serif;
+    cursor: pointer;
 }
 
 /* C A N V A S */
@@ -75,6 +80,8 @@ div.click {
     height: 100%;
 
     z-index: 3;
+
+    cursor: default;
 }
 
 p.msg {
@@ -82,6 +89,7 @@ p.msg {
     z-index: 3;
 
     font-size: 72px;
+    font-family: "Audiowide", sans-serif;
     text-shadow:
         -3px 3px 0 var(--off-bg, #f5f5f5),
         3px 3px 0 var(--off-bg, #f5f5f5),
@@ -160,12 +168,13 @@ div.menu {
 
 div.score-container {
     flex-grow: 0;
-    margin: 10px;
+    margin: 10px 10px 5px;
 }
 
 div.score-container h1 {
+    font-family: "Audiowide", sans-serif;
     font-size: 28px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     text-align: center;
 }
 
@@ -206,7 +215,7 @@ div.score-container p.mode {
 
 div.buttons-container {
     flex-grow: 0;
-    margin: 10px;
+    margin: 5px 10px;
 }
 
 div.buttons-container button.button {
@@ -275,14 +284,19 @@ div.buttons-container div.input-wrapper {
     flex-direction: column;
 }
 
+input#ball-size {
+    cursor: grab;
+}
+
 div.how-to-play-container {
     margin: 10px;
     flex-grow: 1;
 }
 
 div.how-to-play-container h2 {
+    font-family: "Audiowide", sans-serif;
     font-size: 24px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     text-align: center;
 }
 
@@ -304,8 +318,11 @@ p.footer {
 
 p.footer a, a:visited {
     font-size: 14px;
+    font-family: 'Ysabeau Office', sans-serif;
     text-align: center;
     color: var(--text-colour, #000000);
+
+    cursor: pointer;
 }
 
 /* S E T T I N G S   M E N U */
@@ -341,6 +358,7 @@ div.settings-menu-wrapper div.settings-menu {
 }
 
 div.settings-menu h1 {
+    font-family: "Audiowide", sans-serif;
     margin: 20px;
     text-align: center;
 }
@@ -382,6 +400,7 @@ div.settings-menu div.option-container {
 div.option-container label {
     font-size: 18px;
     line-height: 20px;
+    cursor: pointer;
 }
 
 div.option-container input {
@@ -399,6 +418,8 @@ div.option-container span.checkbox {
 
     border-radius: 2px;
     background-color: var(--darkening, #00000022);
+
+    cursor: pointer;
 }
 
 div.option-container input:checked ~ span.checkbox {
@@ -428,9 +449,6 @@ div.option-container input:checked ~ span.checkbox:after {
     display: block;
 }
 
-
-
-
 div.option-container.buttons{
     display: flex;
     flex-wrap: nowrap;
@@ -448,6 +466,7 @@ div.option-container.buttons button.button {
 
     background-color: var(--button-normal, #4CAF50);
     font-size: 16px;
+    font-family: sans-serif;
 }
 
 div.option-container button#enabled-button:hover {

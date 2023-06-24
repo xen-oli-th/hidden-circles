@@ -82,8 +82,9 @@ for (let i = 0; i < BALL_COUNT; i++) {
     balls[i] = new Ball(-100, -100, false);
 }
 
-let nightModeVal = typeof(JSON.parse(localStorage.getItem("nightMode"))) === "boolean" ? JSON.parse(localStorage.getItem("nightMode")) : false;
+let nightModeVal = typeof(JSON.parse(localStorage.getItem("nightMode"))) === "boolean" ? JSON.parse(localStorage.getItem("nightMode")) : true;
 let gridModeVal = typeof(JSON.parse(localStorage.getItem("gridMode"))) === "boolean" ? JSON.parse(localStorage.getItem("gridMode")) : false;
+let cursorModeVal = typeof(JSON.parse(localStorage.getItem("cursorMode"))) === "boolean" ? JSON.parse(localStorage.getItem("cursorMode")) : true;
 
 let highscores;
 let hs = JSON.parse(localStorage.getItem("highscores"));

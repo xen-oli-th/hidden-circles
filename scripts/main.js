@@ -1,7 +1,3 @@
-// todo:
-// - pizzazz (font)
-// - horiz ui mode
-
 $(document).ready(function() {
 
     $('div.ball').css({

@@ -8,6 +8,8 @@ $(document).ready(function() {
     nightMode(nightModeVal);
     $("input#grid-mode").prop("checked", gridModeVal);
     gridMode(gridModeVal);
+    $("input#cursor-mode").prop("checked", cursorModeVal);
+    cursorModeVal ? $("div.click").css("cursor", "crosshair") : $("div.click").css("cursor", "default");
 
     $("input#hs-reset").prop("checked", allowHSReset);
 
@@ -30,6 +32,11 @@ $(document).ready(function() {
             gridMode(gridModeVal);
             localStorage.setItem("gridMode", gridModeVal);
             $("input#grid-mode").prop("checked", gridModeVal);
+        } else if (e.key === "c") {
+            cursorModeVal = !cursorModeVal;
+            cursorModeVal ? $("div.click").css("cursor", "crosshair") : $("div.click").css("cursor", "default");
+            localStorage.setItem("cursorMode", JSON.stringify(cursorModeVal));
+            $("input#cursor-mode").prop("checked", cursorModeVal);
         }
     });
 
@@ -67,6 +74,11 @@ $(document).ready(function() {
             case "hs-reset":
                 allowHSReset = val;
                 HSResetState(allowHSReset);
+            break;
+            case "cursor-mode":
+                cursorModeVal = val;
+                cursorModeVal ? $("div.click").css("cursor", "crosshair") : $("div.click").css("cursor", "default");
+                localStorage.setItem("cursorMode", JSON.stringify(cursorModeVal));
             break;
         }
     })
