@@ -11,9 +11,8 @@ $(document).ready(function() {
 
     $("input#hs-reset").prop("checked", allowHSReset);
 
-    $("p.mode").text(
-        gridModeVal ? `${BALL_SIZE + ballD/20 + GRID_ON}` : `${BALL_SIZE + ballD/20 + GRID_OFF}`
-    );
+    currentMode = gridModeVal ? `${BALL_SIZE + ballD/20 + GRID_ON}` : `${BALL_SIZE + ballD/20 + GRID_OFF}`;
+    $("p.mode").text(currentMode);
 
     document.addEventListener('keydown', (e) => {
         debugLevel >= 4 ? console.log(`Key: ${e.key} pressed`) : "";
@@ -36,6 +35,7 @@ $(document).ready(function() {
 
     $("input#ball-size").change(function() {
         processScores();
+        resetScore();
         ballD = JSON.parse($(this).val());
         localStorage.setItem("ballSize", JSON.stringify(ballD));
         ballR = ballD/2;
@@ -110,6 +110,7 @@ function playClicked() {
         break;
         case GAME_STATES.finished:
             resetBoard();
+            resetScore();
             updateState(GAME_STATES.ready);
         break;
     }
@@ -128,7 +129,9 @@ function exitClicked() {
 }
 
 function shareClicked() {
-
+    let share3;
+    share3 = quintupleCount === 1 ? SHARE_3_SING : SHARE_3_PL; 
+    navigator.clipboard.writeText(SHARE_1 + score + SHARE_2 + quintupleCount + share3 + currentMode + SHARE_4);
 }
 
 function nightMode(state) {
@@ -169,6 +172,7 @@ function gridMode(state) {
     }
 
     processScores();
+    resetScore();
     highscore = highscores[+ gridModeVal][ballD] !== null && highscores[+ gridModeVal][ballD] !== undefined ? highscores[+ gridModeVal][ballD] : 0;
     resetBoard();
     updateState(GAME_STATES.ready);

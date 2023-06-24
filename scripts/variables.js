@@ -95,7 +95,8 @@ if (hs === null || hs === undefined) {
 }
 let score = 0;
 let highscore = highscores[+ gridModeVal][ballD] !== null && highscores[+ gridModeVal][ballD] !== undefined ? highscores[+ gridModeVal][ballD] : 0;
-
+let quintupleCount = 0;
 
 let settingsActive = false;
 let allowHSReset = false;
+let currentMode = "";

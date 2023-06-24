@@ -1,10 +1,14 @@
 // todo:
-// - share button
 // - pazaz (font)
-// - juice (score toast)
+// - toasts (score & share)
 // - horiz ui mode
 
 $(document).ready(function() {
+
+    $('div.ball').css({
+        width: ballD + "px",
+        height: ballD + "px"
+    });
 
     resetBoard();
 
@@ -19,6 +23,8 @@ $(document).ready(function() {
                 if (falseCount === 0) {
                     updateState(GAME_STATES.quintuple);
                     score += 5;
+                    quintupleCount++;
+                    debugLevel >= 3 ? console.log(`Player has achieved ${quintupleCount} quintuple(s) this game.`) : "";
                     $("p#score").text(SCORE + score);
                 } else if (falseCount <= THRESHOLD && GAME_STATES.postThreshold !== gameState) {
                     updateState(GAME_STATES.postThreshold);
@@ -96,9 +102,8 @@ function resetBoard() {
         })
     }
 
-    $("p.mode").text(
-        gridModeVal ? `${BALL_SIZE + ballD/20 + GRID_ON}` : `${BALL_SIZE + ballD/20 + GRID_OFF}`
-    );
+    currentMode = gridModeVal ? `${BALL_SIZE + ballD/20 + GRID_ON}` : `${BALL_SIZE + ballD/20 + GRID_OFF}`;
+    $("p.mode").text(currentMode);
 }
 
 function endGame() {
@@ -117,5 +122,9 @@ function processScores() {
         highscores[+ gridModeVal][ballD] = score;
         localStorage.setItem("highscores", JSON.stringify(highscores));
     }
+}
+
+function resetScore() {
     score = 0;
+    quintupleCount = 0;
 }

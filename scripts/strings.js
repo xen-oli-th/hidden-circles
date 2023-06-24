@@ -14,3 +14,10 @@ const HIGHSCORE = "Highscore: ";
 const BALL_SIZE = "(ball size ";
 const GRID_ON = " with the grid)";
 const GRID_OFF = ")";
+
+// SHARE
+const SHARE_1 = "I just got a score of ";
+const SHARE_2 = " with ";
+const SHARE_3_PL = " quintuples on Hidden Circles! ";
+const SHARE_3_SING = " quintuple on Hidden Circles! ";
+const SHARE_4 = ". Play it for free at <link>";
