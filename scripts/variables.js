@@ -67,10 +67,8 @@ const GAME_STATES = {
 
 let gameState = GAME_STATES.ready;
 
-let ballD = 40;
+let ballD = typeof(JSON.parse(localStorage.getItem("ballSize"))) === "number" ? JSON.parse(localStorage.getItem("ballSize")) : 40;
 let ballR = ballD/2;
-
-
 
 class Ball {
     constructor(x, y, found) {
@@ -84,18 +82,19 @@ for (let i = 0; i < BALL_COUNT; i++) {
     balls[i] = new Ball(-100, -100, false);
 }
 
+let nightModeVal = typeof(JSON.parse(localStorage.getItem("nightMode"))) === "boolean" ? JSON.parse(localStorage.getItem("nightMode")) : false;
+let gridModeVal = typeof(JSON.parse(localStorage.getItem("gridMode"))) === "boolean" ? JSON.parse(localStorage.getItem("gridMode")) : false;
 
 let highscores;
 let hs = JSON.parse(localStorage.getItem("highscores"));
 if (hs === null || hs === undefined) {
     debugLevel >= 2 ? console.warn("Highscore localStorage item is null or undefined.") : "";
-    highscores = {}
+    highscores = [[], []];
 } else {
     highscores = hs;
 }
 let score = 0;
-let highscore = highscores[ballD] !== null && highscores[ballD] !== undefined ? highscores[ballD] : 0;
+let highscore = highscores[+ gridModeVal][ballD] !== null && highscores[+ gridModeVal][ballD] !== undefined ? highscores[+ gridModeVal][ballD] : 0;
 
-let nightModeVal = typeof(JSON.parse(localStorage.getItem("nightMode"))) === "boolean" ? JSON.parse(localStorage.getItem("nightMode")) : false;
 
 let settingsActive = false;

@@ -21,6 +21,18 @@
         <div class="ball" id="b3"></div>
         <div class="ball" id="b4"></div>
 
+        <div class="grid-container">
+            <div class="grid horiz" id="g1"></div>
+            <div class="grid horiz" id="g2"></div>
+            <div class="grid horiz" id="g3"></div>
+            <div class="grid horiz" id="g4"></div>
+
+            <div class="grid vert" id="g1"></div>
+            <div class="grid vert" id="g2"></div>
+            <div class="grid vert" id="g3"></div>
+            <div class="grid vert" id="g4"></div>
+        </div>
+
         <p class="msg"></p>
 
         <div class="click"></div>
@@ -33,9 +45,10 @@
             <h1>Hidden Circles</h1>
             <p class="score" id="score">Score: 0</p>
             <p class="score" id="highscore">High Score: 0</p>
+            <p class="mode">(Ball size 2)</p>
         </div>
         <div class="buttons-container">
-            <button class="play button" onclick="playClicked()" id="disabled-button">Play Game</button>
+            <button class="play button" onclick="playClicked()" id="disabled-button">Start Game</button>
             <div class="share-options-container">
                 <button class="share button" onclick="shareClicked()" id="enabled-button">Share Score</button>
                 <button class="settings button" onclick="settingsClicked()" id="enabled-button">⚙️</button>
@@ -70,8 +83,8 @@
             </div>
 
             <div class="option-container">
-                <label for="grid-setting">Enable Grid
-                    <input class="builtin-checkbox" type="checkbox" id="grid-setting" name="grid-setting" value="true">
+                <label for="grid-mode">Enable Grid (resets game)
+                    <input class="builtin-checkbox" type="checkbox" id="grid-mode" name="grid-mode" value="true">
                     <span class="checkbox"></span>
                 </label>
             </div>

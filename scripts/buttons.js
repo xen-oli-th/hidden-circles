@@ -2,9 +2,15 @@ let settingsHover = false;
 
 $(document).ready(function() {
 
-    $("input#ball-size").val(40);
+    $("input#ball-size").val(ballD);
     $("input#night-mode").checked = nightModeVal;
     nightMode(nightModeVal);
+    $("input#grid-mode").checked = gridModeVal;
+    gridMode(gridModeVal);
+
+    $("p.mode").text(
+        gridModeVal ? `${BALL_SIZE + ballD/20 + GRID_ON}` : `${BALL_SIZE + ballD/20 + GRID_OFF}`
+    );
 
     document.addEventListener('keydown', (e) => {
         debugLevel >= 4 ? console.log(`Key: ${e.key} pressed`) : "";
@@ -17,22 +23,25 @@ $(document).ready(function() {
             nightMode(nightModeVal);
             localStorage.setItem("nightMode", nightModeVal);
             $("input#night-mode").prop("checked", nightModeVal);
+        } else if (e.key === "g") {
+            gridModeVal = !gridModeVal;
+            gridMode(gridModeVal);
+            localStorage.setItem("gridMode", gridModeVal);
+            $("input#grid-mode").prop("checked", gridModeVal);
         }
-
     });
-
-
 
     $("input#ball-size").change(function() {
         processScores();
         ballD = JSON.parse($(this).val());
+        localStorage.setItem("ballSize", JSON.stringify(ballD));
         ballR = ballD/2;
         debugLevel >= 3 ? console.log("Ball size changed to " + ballD) : "";
         $('div.ball').css({
             width: ballD + "px",
             height: ballD + "px"
         });
-        highscore = highscores[ballD] !== null && highscores[ballD] !== undefined ? highscores[ballD] : 0;
+        highscore = highscores[+ gridModeVal][ballD] !== null && highscores[+ gridModeVal][ballD] !== undefined ? highscores[+ gridModeVal][ballD] : 0;
         resetBoard();
         updateState(GAME_STATES.ready);
     });
@@ -45,7 +54,12 @@ $(document).ready(function() {
             case "night-mode":
                 nightModeVal = val;
                 nightMode(nightModeVal);
-                localStorage.setItem("nightMode", nightModeVal);
+                localStorage.setItem("nightMode", JSON.stringify(nightModeVal));
+            break;
+            case "grid-mode":
+                gridModeVal = val;
+                gridMode(gridModeVal);
+                localStorage.setItem("gridMode", JSON.stringify(gridModeVal));
             break;
         }
     })
@@ -132,5 +146,20 @@ function nightMode(state) {
         css.style.setProperty("--semi-dark", SEMI_DARK);
         css.style.setProperty("--darkening", DARKENING);
     }
+}
+
+function gridMode(state) {
+    if (state) {
+        $("div.grid-container").css("display", "block");
+        debugLevel >= 4 ? console.log("Grid enabled") : "";
+    } else {
+        $("div.grid-container").css("display", "none");
+        debugLevel >= 4 ? console.log("Grid enabled") : "";
+    }
+
+    processScores();
+    highscore = highscores[+ gridModeVal][ballD] !== null && highscores[+ gridModeVal][ballD] !== undefined ? highscores[+ gridModeVal][ballD] : 0;
+    resetBoard();
+    updateState(GAME_STATES.ready);
 }
 

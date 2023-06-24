@@ -1,5 +1,5 @@
 // PLAY BUTTON
-const PLAY_GAME = "Play Game";
+const PLAY_GAME = "Start Game";
 const START_ROUND = "Start Round";
 const NEXT_ROUND = "Next Round";
 const NEW_GAME = "New Game";
@@ -11,3 +11,6 @@ const QUINTUPLE = "Quintuple!";
 // SCORING
 const SCORE = "Score: ";
 const HIGHSCORE = "Highscore: ";
+const BALL_SIZE = "(Ball size ";
+const GRID_ON = " with the grid)";
+const GRID_OFF = ")";

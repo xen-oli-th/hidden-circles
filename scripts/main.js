@@ -1,8 +1,8 @@
 // todo:
 // - share button
-// - grid :/
 // - pazaz (font)
 // - juice (score toast)
+// - horiz ui mode
 
 $(document).ready(function() {
 
@@ -95,6 +95,10 @@ function resetBoard() {
             top: balls[i].y
         })
     }
+
+    $("p.mode").text(
+        gridModeVal ? `${BALL_SIZE + ballD/20 + GRID_ON}` : `${BALL_SIZE + ballD/20 + GRID_OFF}`
+    );
 }
 
 function endGame() {
@@ -110,7 +114,7 @@ function processScores() {
     if (score > highscore) {
         debugLevel >= 2 ? console.log("Highscore broken, setting new score.") : "";
         highscore = score;
-        highscores[ballD] = score;
+        highscores[+ gridModeVal][ballD] = score;
         localStorage.setItem("highscores", JSON.stringify(highscores));
     }
     score = 0;
